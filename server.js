@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 5050;
 //Connect Database
 connectDB();
 
+//Init middleware
+app.use(express.json({ extended: false }));
+
 //Landing Page route
 app.get("/", (req, res) => res.send("API Running"));
 
