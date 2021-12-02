@@ -18,7 +18,7 @@ const User = require("../../models/User");
 // @access  Public
 router.post(
   "/",
-  //   validation for the data
+  // validation for the data
   [
     check("name", "Name is required").not().isEmpty(),
     check("email", "Valid email is required").isEmail(),
@@ -75,7 +75,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtToken"),
+        config.get("jwtSecret"),
         { expiresIn: 360000 },
         (e, token) => {
           if (e) throw e;
