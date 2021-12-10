@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-function Landing(props) {
+const Landing = () => {
   return (
     <div>
       <section className="landing">
@@ -29,6 +28,6 @@ function Landing(props) {
       </section>
     </div>
   );
-}
+};
 
 export default Landing;
