@@ -1,7 +1,13 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+  CLEAR_PROFILE,
+  ACCOUNT_DELETED,
+} from "./types";
 
 //Get the current user's profile
 export const getCurrentProfile = () => async (dispatch) => {
@@ -121,5 +127,64 @@ export const addUserEducation = (formData, history) => async (dispatch) => {
       type: PROFILE_ERROR,
       payload: { msg: e.response.statusText, status: e.response.status },
     });
+  }
+};
+
+//Delete experience
+export const deleteUserExperience = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/profile/experience/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Experience successfully deleted", "success"));
+  } catch (e) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: e.response.statusText, status: e.response.status },
+    });
+  }
+};
+
+//Delete education
+export const deleteUserEducation = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/profile/education/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Education successfully deleted", "success"));
+  } catch (e) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: e.response.statusText, status: e.response.status },
+    });
+  }
+};
+
+//Delete account & Profile
+export const deleteUserAccount = () => async (dispatch) => {
+  if (window.confirm("Please confirm. This cannot be UNDONE.")) {
+    try {
+      const res = await axios.delete(`/api/profile`);
+
+      dispatch({
+        type: CLEAR_PROFILE,
+        type: ACCOUNT_DELETED,
+      });
+
+      dispatch(setAlert("Account permanently deleted", "danger"));
+    } catch (e) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: e.response.statusText, status: e.response.status },
+      });
+    }
   }
 };
