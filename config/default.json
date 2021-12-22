@@ -1,6 +1,5 @@
 {
   "mongoURI": "mongodb+srv://JSenpai:Jegermeledak127@devhubbdb.mr4he.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   "jwtSecret": "A4983494567ED611E9468F92D1BE6",
-  "githubClientId": "01e3bbed66cf765716a4",
-  "githubSecret": "c76a7f67f5b5e2819efe880490c1fde64cf437c0"
+  "githubToken": "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"
 }
