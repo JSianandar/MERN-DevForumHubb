@@ -226,7 +226,7 @@ export const deleteUserEducation = (id) => async (dispatch) => {
 export const deleteUserAccount = () => async (dispatch) => {
   if (window.confirm("Please confirm. This cannot be UNDONE.")) {
     try {
-      const res = await axios.delete(`/api/profile`);
+      await axios.delete(`/api/profile`);
 
       dispatch({
         type: CLEAR_PROFILE,
