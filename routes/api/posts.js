@@ -194,7 +194,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
 
     //Pull out comment from the post
     const comment = post.comments.find(
-      (comment) => comment.id === req.params.comment_id
+      (comment) => comment.id.toString() === req.params.comment_id
     );
     //Make sure comment exists
     if (!comment) {
@@ -205,10 +205,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
       return res.status(401).json({ msg: "User not authorized" });
     }
 
-    const removeIndex = post.comments
-      .map((comment) => comment.user.toString())
-      .indexOf(req.user.id);
-    post.comments.splice(removeIndex, 1);
+    comment.remove();
 
     await post.save();
 
